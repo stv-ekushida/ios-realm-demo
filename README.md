@@ -33,7 +33,6 @@ class ToDoModel: Object {
 
 ## 4. Daoの作成
 
-
 ```
 import Foundation
 import RealmSwift
@@ -91,6 +90,7 @@ final class ToDoDao {
 
 ## 参考
 
+```
 import RealmSwift
 
 final class RealmDaoHelper <T : RealmSwift.Object> {
