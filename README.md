@@ -31,7 +31,7 @@ class ToDoModel: Object {
 }
 ```
 
-## 4. Daoの作成
+## 4. DAOの作成
 
 ```
 import Foundation
