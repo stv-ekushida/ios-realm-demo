@@ -13,7 +13,7 @@ iOS Realmを利用したCRUD操作のサンプルです。
 import RealmSwift
 ```
 
-## 3. モデルの作成
+## 3. モデル(Entity)の作成
 
 ```
 import Foundation
