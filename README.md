@@ -33,7 +33,7 @@ class ToDoModel: Object {
 
 ## 4. DAOの作成
 
-```
+```:swift
 import Foundation
 import RealmSwift
 
@@ -109,12 +109,8 @@ final class RealmDaoHelper <T : RealmSwift.Object> {
             return nil
         }
         
-        if let last = realm.objects(T.self).last as? RealmSwift.Object,
-            let lastId = last[key] as? Int {
-            return lastId + 1
-        } else {
-            return 1
-        }
+        let realm = try! Realm()
+        return (realm.objects(T.self).max(ofProperty: key) as Int? ?? 0) + 1
     }
     
     /**
