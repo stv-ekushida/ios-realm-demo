@@ -10,10 +10,10 @@ import Foundation
 import RealmSwift
 
 class ToDoModel: Object {
-    dynamic var taskID = 0
-    dynamic var title = ""
-    dynamic var limitDate: Date?
-    dynamic var isDone = false
+    @objc dynamic var taskID = 0
+    @objc dynamic var title = ""
+    @objc dynamic var limitDate: Date?
+    @objc dynamic var isDone = false
     
     override static func primaryKey() -> String? {
         return "taskID"

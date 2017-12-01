@@ -64,8 +64,8 @@ final class RealmDaoHelper <T : RealmSwift.Object> {
             try realm.write {
                 realm.add(d)
             }
-        } catch let error as NSError {
-            print(error.description)
+        } catch let error {
+            print(error.localizedDescription)
         }
     }
     
@@ -79,8 +79,8 @@ final class RealmDaoHelper <T : RealmSwift.Object> {
                 realm.add(d, update: true)
             }
             return true
-        } catch let error as NSError {
-            print(error.description)
+        } catch let error {
+            print(error.localizedDescription)
         }
         return false
     }
@@ -93,8 +93,8 @@ final class RealmDaoHelper <T : RealmSwift.Object> {
             try realm.write {
                 realm.delete(d)
             }
-        } catch let error as NSError {
-            print(error.description)
+        } catch let error {
+            print(error.localizedDescription)
         }
     }
     
@@ -107,10 +107,8 @@ final class RealmDaoHelper <T : RealmSwift.Object> {
             try realm.write {
                 realm.delete(objs)
             }
-        } catch let error as NSError {
-            print(error.description)
+        } catch let error {
+            print(error.localizedDescription)
         }
     }
-    
 }
-
