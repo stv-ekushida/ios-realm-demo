@@ -13,21 +13,33 @@ final class ToDoDao {
     
     static let dao = RealmDaoHelper<ToDoModel>()
     
-    static func add(model: ToDoModel) {
-        model.taskID = ToDoDao.dao.newId()!
-        ToDoDao.dao.add(object: model)
+    static func add(object: ToDoModel) {
+        object.taskID = ToDoDao.dao.newId()!
+        ToDoDao.dao.add(object: object)
     }
     
-    static func update(model: ToDoModel) {
-        _ = dao.update(d: model)
+    static func add(objects: [ToDoModel]) {
+        let newId = ToDoDao.dao.newId()!
+        for (i, object) in objects.enumerated() {
+           object.taskID = Int(i + newId)
+        }
+        dao.add(objects: objects)
     }
-    
+
+    static func update(object: ToDoModel) {
+        dao.update(object: object)
+    }
+
+    static func update(objects: [ToDoModel]) {
+        dao.update(objects: objects)
+    }
+
     static func delete(taskID: Int) {
         
         guard let object = dao.findFirst(key: taskID as AnyObject) else {
             return
         }
-        dao.delete(d: object)
+        dao.delete(object: object)
     }
     
     static func deleteAll() {        
@@ -42,7 +54,6 @@ final class ToDoDao {
     }
     
     static func findAll() -> [ToDoModel] {
-        let objects =  ToDoDao.dao.findAll()
-        return objects.map { ToDoModel(value: $0) }
+        return ToDoDao.dao.findAll().map { ToDoModel(value: $0) }
     }
 }
