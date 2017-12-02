@@ -88,11 +88,26 @@ final class RealmDaoHelper <T : RealmSwift.Object> {
     /**
      * T: RealmSwift.Object で primaryKey()が実装されている時のみ有効
      */
-    func update(d: T, block:(() -> Void)? = nil) -> Bool {
+    @discardableResult
+    func update(object: T, block:(() -> Void)? = nil) -> Bool {
         do {
             try realm.write {
                 block?()
-                realm.add(d, update: true)
+                realm.add(object, update: true)
+            }
+            return true
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        return false
+    }
+    
+    @discardableResult
+    func update(objects: [T], block:(() -> Void)? = nil) -> Bool {
+        do {
+            try realm.write {
+                block?()
+                realm.add(objects, update: true)
             }
             return true
         } catch let error {
@@ -104,10 +119,10 @@ final class RealmDaoHelper <T : RealmSwift.Object> {
     /**
      * レコード削除
      */
-    func delete(d: T) {
+    func delete(object: T) {
         do {
             try realm.write {
-                realm.delete(d)
+                realm.delete(object)
             }
         } catch let error {
             print(error.localizedDescription)
