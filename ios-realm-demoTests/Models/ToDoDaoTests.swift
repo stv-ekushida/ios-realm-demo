@@ -44,14 +44,19 @@ class ToDoDaoTests: XCTestCase {
         object.title = "タイトル"
         object.isDone = true
         object.limitDate = "2016/01/01".str2Date(dateFormat: "yyyy/MM/dd")
-        
-        //Exercise
         ToDoDao.add(model:object)
-        object.title = "タイトル更新"
-        object.isDone = false
-        
-        //Verify
-        verifyItem(taskID: 1, title: "タイトル更新", isDone: false, limiteDateStr: "2016/01/01")
+
+        //Exercise
+        if let object = ToDoDao.findByID(taskID: 1) {
+            
+            let updateObject = ToDoModel(value: object)
+            updateObject.title = "タイトル更新"
+            updateObject.isDone = false
+            ToDoDao.update(model: updateObject)
+            
+            //Verify
+            verifyItem(taskID: 1, title: "タイトル更新", isDone: false, limiteDateStr: "2016/01/01")
+        }
     }
     
     func testDeleteItem() {
