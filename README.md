@@ -86,6 +86,9 @@ final class RealmDaoHelper <T : RealmSwift.Object> {
     
     init() {
         try! realm = Realm()
+        defer {
+            realm.invalidate()
+        }
     }
     
     /**
@@ -130,12 +133,25 @@ final class RealmDaoHelper <T : RealmSwift.Object> {
     }
     
     /**
-     * レコード追加を取得
+     * レコード追加
      */
-    func add(d :T) {
+    func add(object :T) {
         do {
             try realm.write {
-                realm.add(d)
+                realm.add(object)
+            }
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
+    /// 複数件のレコードを追加
+    ///
+    /// - Parameter objects: 複数件のレコード
+    func add(objects: [T]) {
+        do {
+            try realm.write {
+                realm.add(objects)
             }
         } catch let error {
             print(error.localizedDescription)
