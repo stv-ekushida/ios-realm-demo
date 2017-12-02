@@ -1,10 +1,10 @@
 # ios-realm-demo
 iOS Realmを利用したCRUD操作のサンプルです。
 
-## 1. PodFile
+## 1. Cartfile
 
 ```
-  pod 'RealmSwift' , '<= 2.4.1'
+  github "realm/realm-cocoa" "v3.0.2"
 ```
 
 ## 2. import する
@@ -20,10 +20,10 @@ import Foundation
 import RealmSwift
 
 class ToDoModel: Object {
-    dynamic var taskID = 0
-    dynamic var title = ""
-    dynamic var limitDate: Date?
-    dynamic var isDone = false
+    @objc dynamic var taskID = 0
+    @objc dynamic var title = ""
+    @objc dynamic var limitDate: Date?
+    @objc dynamic var isDone = false
     
     override static func primaryKey() -> String? {
         return "taskID"
@@ -149,8 +149,8 @@ final class RealmDaoHelper <T : RealmSwift.Object> {
             try realm.write {
                 realm.add(d)
             }
-        } catch let error as NSError {
-            print(error.description)
+        } catch let error {
+            print(error.localizedDescription)
         }
     }
     
@@ -164,8 +164,8 @@ final class RealmDaoHelper <T : RealmSwift.Object> {
                 realm.add(d, update: true)
             }
             return true
-        } catch let error as NSError {
-            print(error.description)
+        } catch let error {
+            print(error.localizedDescription)
         }
         return false
     }
@@ -178,8 +178,8 @@ final class RealmDaoHelper <T : RealmSwift.Object> {
             try realm.write {
                 realm.delete(d)
             }
-        } catch let error as NSError {
-            print(error.description)
+        } catch let error {
+            print(error.localizedDescription)
         }
     }
     
@@ -192,10 +192,9 @@ final class RealmDaoHelper <T : RealmSwift.Object> {
             try realm.write {
                 realm.delete(objs)
             }
-        } catch let error as NSError {
-            print(error.description)
+        } catch let error {
+            print(error.localizedDescription)
         }
     }
-    
 }
 ```
