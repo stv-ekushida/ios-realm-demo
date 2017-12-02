@@ -4,7 +4,13 @@ iOS Realmを利用したCRUD操作のサンプルです。
 ## 1. Cartfile
 
 ```
-  github "realm/realm-cocoa" "v3.0.2"
+  github "realm/realm-cocoa" "v3.0.2"  
+```
+
+#### ビルドする
+
+```
+carthage update --platform iOS
 ```
 
 ## 2. import する
